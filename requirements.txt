@@ -42,6 +42,6 @@ orjson>=3.9.0
 pydantic>=2.5.0
 
 # ---------------- Optional (Vector Store / Memory) ----------------
-faiss-cpu>=1.7.4
+# faiss-cpu is not used by this app and can fail on some cloud Python builds.
 
 
