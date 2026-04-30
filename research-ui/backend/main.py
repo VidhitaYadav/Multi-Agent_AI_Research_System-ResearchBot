@@ -12,12 +12,13 @@ Expected folder layout:
                 main.py              <- THIS FILE
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import asyncio
 import sys
 import os
+import time
 
 # ------------------------------------------------------------------------------
 # PATH SETUP
@@ -46,6 +47,11 @@ print("=" * 60 + "\n")
 # ------------------------------------------------------------------------------
 app = FastAPI(title="Multi-Agent Research API", version="1.0.0")
 
+MAX_MESSAGE_LENGTH = 300
+RATE_LIMIT_WINDOW_SECONDS = 60
+RATE_LIMIT_MAX_REQUESTS = 3
+request_log: dict[str, list[float]] = {}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
@@ -65,6 +71,34 @@ class ChatResponse(BaseModel):
     feedback: str = ""
 
 
+def get_client_ip(request: Request) -> str:
+    forwarded_for = request.headers.get("x-forwarded-for")
+    if forwarded_for:
+        return forwarded_for.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+
+def enforce_rate_limit(client_ip: str) -> None:
+    now = time.time()
+    recent_requests = [
+        timestamp
+        for timestamp in request_log.get(client_ip, [])
+        if now - timestamp < RATE_LIMIT_WINDOW_SECONDS
+    ]
+
+    if len(recent_requests) >= RATE_LIMIT_MAX_REQUESTS:
+        raise HTTPException(
+            status_code=429,
+            detail=(
+                f"Too many requests. Please wait a minute before trying again. "
+                f"Limit: {RATE_LIMIT_MAX_REQUESTS} requests per {RATE_LIMIT_WINDOW_SECONDS} seconds."
+            ),
+        )
+
+    recent_requests.append(now)
+    request_log[client_ip] = recent_requests
+
+
 @app.get("/")
 def root():
     return {
@@ -76,10 +110,18 @@ def root():
 
 
 @app.post("/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest):
+async def chat(request: ChatRequest, http_request: Request):
     topic = request.message.strip()
     if not topic:
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
+    if len(topic) > MAX_MESSAGE_LENGTH:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Message is too long. Please keep it under {MAX_MESSAGE_LENGTH} characters.",
+        )
+
+    client_ip = get_client_ip(http_request)
+    enforce_rate_limit(client_ip)
 
     try:
         from pipeline import run_research_pipeline
