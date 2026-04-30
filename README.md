@@ -54,7 +54,7 @@ User -> React Frontend -> FastAPI Backend -> pipeline.py
 ## Project Structure
 
 ```text
-MultiAgentSystem_GenAI/
+MultiAgentSystem/
 ├── agents.py
 ├── pipeline.py
 ├── tools.py
