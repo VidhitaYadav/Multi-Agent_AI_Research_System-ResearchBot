@@ -1,0 +1,47 @@
+# ---------------- Core LLM + LangChain ----------------
+langchain>=0.2.0
+langchain-core>=0.2.0
+langchain-community>=0.2.0
+langchain-openai>=0.1.0
+
+# ---------------- MistralAI ----------------
+mistralai>=1.0.0
+python-dotenv>=1.0.0
+
+# ---------------- Search Tool ----------------
+tavily-python>=0.3.0
+
+# ---------------- Web Scraping ----------------
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+lxml>=5.0.0
+html5lib>=1.1
+
+# ---------------- Backend / API ----------------
+fastapi>=0.110.0
+uvicorn>=0.29.0
+
+# ---------------- Data Handling ----------------
+pandas>=2.0.0
+
+# ---------------- Environment ----------------
+python-dotenv>=1.0.0
+
+# ---------------- Async / HTTP ----------------
+httpx>=0.27.0
+
+# ---------------- Reliability / Logging ----------------
+tenacity>=8.2.0
+loguru>=0.7.0
+rich>=13.7.0
+
+# ---------------- JSON / Performance ----------------
+orjson>=3.9.0
+
+# ---------------- Typing / Validation ----------------
+pydantic>=2.5.0
+
+# ---------------- Optional (Vector Store / Memory) ----------------
+faiss-cpu>=1.7.4
+
+

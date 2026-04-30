@@ -1,0 +1,37 @@
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+.venv/
+env/
+ENV/
+
+# ── Environment variables — NEVER COMMIT API KEYS ─────────────
+.env
+.env.local
+.env.production
+
+# ── Node / React ───────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+frontend/build/
+
+# ── VS Code ────────────────────────────────────────────────────
+.vscode/
+
+# ── Windows system files ───────────────────────────────────────
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ── macOS ──────────────────────────────────────────────────────
+.DS_Store
