@@ -153,7 +153,7 @@ Because the project is publicly accessible and backed by paid API keys, the back
 - maximum input length
 - per-IP request throttling
 
-These protections help preserve API quota while keeping the demo open for recruiters and reviewers.
+These protections help preserve API quota while keeping the demo open for reviewers.
 
 ## Limitations
 
