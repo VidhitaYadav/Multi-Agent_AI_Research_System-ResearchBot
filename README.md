@@ -3,9 +3,7 @@
 A full-stack AI research assistant that turns a topic into a structured research report through a multi-agent pipeline. The system combines web search, webpage reading, report generation, and critique into a single chat-style experience.
 
 ## Live Demo
-
-- Frontend: [https://multi-agent-ai-research-system-td58.onrender.com](https://multi-agent-ai-research-system-td58.onrender.com)
-- Backend API: [https://multi-agent-ai-research-system.onrender.com](https://multi-agent-ai-research-system.onrender.com)
+[https://multi-agent-ai-research-system-td58.onrender.com](https://multi-agent-ai-research-system-td58.onrender.com)
 
 Note: The project is hosted on Render's free tier, so the first request may take a few seconds while the service wakes up.
 
@@ -148,105 +146,6 @@ For frontend production deployment, set:
 REACT_APP_API_URL=https://multi-agent-ai-research-system.onrender.com
 ```
 
-## Local Setup
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/VidhitaYadav/Multi-Agent_AI_Research_System-ResearchBot.git
-cd Multi-Agent_AI_Research_System-ResearchBot
-```
-
-### 2. Create and activate a virtual environment
-
-Windows PowerShell:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-### 3. Install backend dependencies
-
-```powershell
-python -m pip install -r requirements.txt
-python -m pip install -r research-ui\backend\requirements.txt
-```
-
-### 4. Start the backend
-
-```powershell
-cd research-ui
-python -m uvicorn backend.main:app --reload --port 8000
-```
-
-### 5. Start the frontend
-
-Open a new terminal:
-
-```powershell
-cd research-ui\frontend
-npm install
-npm start
-```
-
-### 6. Open the app
-
-- Frontend: [http://localhost:3000](http://localhost:3000)
-- Backend health check: [http://localhost:8000](http://localhost:8000)
-
-## API
-
-### `GET /`
-
-Returns service health information.
-
-### `POST /chat`
-
-Request:
-
-```json
-{
-  "message": "Suggest a GenAI research topic"
-}
-```
-
-Response:
-
-```json
-{
-  "reply": "Formatted research output...",
-  "report": "Generated report...",
-  "feedback": "Critic feedback..."
-}
-```
-
-## Deployment
-
-### Backend on Render
-
-- Root Directory: `research-ui/backend`
-- Build Command: `pip install -r requirements.txt`
-- Start Command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-- Python Version: `3.11.11`
-
-Required environment variables:
-
-- `TAVILY_API_KEY`
-- `OPENAI_API_KEY` or `MISTRAL_API_KEY`
-- `PYTHON_VERSION=3.11.11`
-
-### Frontend on Render
-
-- Service Type: Static Site
-- Root Directory: `research-ui/frontend`
-- Build Command: `npm install && npm run build`
-- Publish Directory: `build`
-
-Required environment variable:
-
-- `REACT_APP_API_URL=https://multi-agent-ai-research-system.onrender.com`
-
 ## Public Demo Safeguards
 
 Because the project is publicly accessible and backed by paid API keys, the backend includes lightweight protections:
@@ -263,9 +162,6 @@ These protections help preserve API quota while keeping the demo open for recrui
 - Render free tier can introduce cold-start delays
 - The current rate limit is intentionally simple and in-memory, so it is best suited for demo usage
 
-## Resume-Friendly Summary
-
-Built and deployed a full-stack multi-agent AI research assistant using LangChain, FastAPI, React, Tavily, and LLM-based report generation. The system orchestrates search, reading, writing, and critique agents in a single workflow and is deployed live on Render.
 
 ## Future Improvements
 
@@ -279,5 +175,4 @@ Built and deployed a full-stack multi-agent AI research assistant using LangChai
 
 Vidhita Yadav
 
-- GitHub: [https://github.com/VidhitaYadav](https://github.com/VidhitaYadav)
-- Project Repository: [https://github.com/VidhitaYadav/Multi-Agent_AI_Research_System-ResearchBot](https://github.com/VidhitaYadav/Multi-Agent_AI_Research_System-ResearchBot)
+(https://github.com/VidhitaYadav/Multi-Agent_AI_Research_System-ResearchBot)
